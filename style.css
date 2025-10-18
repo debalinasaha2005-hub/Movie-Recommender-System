@@ -1,0 +1,6 @@
+[data-testid="stAppViewContainer"] {
+background-image: url("bg_movie_hall.jpg");
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+}

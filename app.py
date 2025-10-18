@@ -3,7 +3,18 @@ import pickle
 import pandas as pd
 import os
 import gdown
+st.set_page_config(
+    page_title="Movie Recommender System",
+    page_icon="popcorn_movie.jpg", #  custom logo/icon
+    layout="wide"
+)
 
+def local_css(file_name):
+    # This function reads .css file
+    with open(file_name) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+local_css("style.css")
 
 SIMILARITY_PKL_FILE_ID = "1gjj5dOnzGTxzUjq2nGptVTdQxJWUovnB"
 SIMILARITY_PKL_PATH = 'similarity.pkl'
@@ -20,7 +31,7 @@ if not os.path.exists(SIMILARITY_PKL_PATH):
 
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
-similarity = pickle.load(open('similarity.pkl', 'rb'))
+similarity = pickle.load(open('SIMILARITY_PKL_PATH', 'rb'))
 
 
 # This line creates the final URL column that the function will use:
