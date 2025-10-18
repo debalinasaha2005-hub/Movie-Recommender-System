@@ -31,7 +31,7 @@ if not os.path.exists(SIMILARITY_PKL_PATH):
 
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
-similarity = pickle.load(open('SIMILARITY_PKL_PATH', 'rb'))
+similarity = pickle.load(open(SIMILARITY_PKL_PATH, 'rb'))
 
 
 # This line creates the final URL column that the function will use:
