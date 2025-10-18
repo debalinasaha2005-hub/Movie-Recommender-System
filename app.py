@@ -2,25 +2,24 @@ import streamlit as st
 import pickle
 import pandas as pd
 import os
-import requests
+import gdown
 
 
-def download_file(url,filename):
-    if not os.path.exists(filename):
-        st.info("Downloading file: {filename}")
+SIMILARITY_PKL_FILE_ID = "1gjj5dOnzGTxzUjq2nGptVTdQxJWUovnB"
+SIMILARITY_PKL_PATH = 'similarity.pkl'
 
-        response = requests.get(url, stream=True)
-        with open(filename, 'wb') as f:
-            for chunk in response.iter_content(chunk_size=1024):
-                if chunk: f.write(chunk)
-        st.success("Downloaded file: {filename}")
-    return filename
-
-SIMILARITY_PKL_URL = "https://drive.google.com/uc?export=download&id=1gjj5dOnzGTxzUjq2nGptVTdQxJWUovnB"
+if not os.path.exists(SIMILARITY_PKL_PATH):
+    st.info(f"Downloading large file: {SIMILARITY_PKL_PATH}...")
+    try:
+        # gdown downloads the file by ID and saves it locally
+        gdown.download(id=SIMILARITY_PKL_FILE_ID, output=SIMILARITY_PKL_PATH, quiet=True, fuzzy=True)
+        st.success(f"{SIMILARITY_PKL_PATH} downloaded successfully!")
+    except Exception as e:
+        st.error(f"Error downloading file with gdown: {e}")
+        st.stop()
 
 movies_dict = pickle.load(open('movie_dict.pkl', 'rb'))
 movies = pd.DataFrame(movies_dict)
-similarity_pkl_path = download_file(SIMILARITY_PKL_URL, "similarity.pkl")
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
 
@@ -67,11 +66,8 @@ if st.button('Recommend'):
 
     for i, rec in enumerate(recommendations):
         with cols[i]:
-            # Display the poster image using the URL
 
-            # Display the title as a clickable link
+
+
             st.markdown(f"[{rec['title']}]({rec['link_url']})")
-
-            # Since we don't have a poster URL, we display a placeholder image
-            # This is the best visual substitute for a missing poster.
 
