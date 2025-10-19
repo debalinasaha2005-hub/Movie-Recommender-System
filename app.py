@@ -3,11 +3,6 @@ import pickle
 import pandas as pd
 import os
 import gdown
-st.set_page_config(
-    page_title="Movie Recommender System",
-    page_icon="popcorn_logo.jpg", #  custom logo/icon
-    layout="wide"
-)
 
 def local_css(file_name):
     # This function reads .css file
@@ -15,13 +10,6 @@ def local_css(file_name):
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 local_css("style.css")
-
-col1, col2 = st.columns([1, 4])
-
-with col1:
-    st.image("popcorn_logo.jpg")
-with col2:
-    st.title("Movie Recommender System")
 
 SIMILARITY_PKL_FILE_ID = "1gjj5dOnzGTxzUjq2nGptVTdQxJWUovnB"
 SIMILARITY_PKL_PATH = 'similarity.pkl'
