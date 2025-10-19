@@ -3,7 +3,10 @@ import pickle
 import pandas as pd
 import os
 import gdown
-
+st.set_page_config(
+    page_title="Movie Recommender System",
+    layout="wide"
+)
 def local_css(file_name):
     # This function reads .css file
     with open(file_name) as f:
